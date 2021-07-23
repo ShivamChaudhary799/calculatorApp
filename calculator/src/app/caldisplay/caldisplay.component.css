@@ -1,0 +1,17 @@
+.containers{
+    margin-left: 38vw;
+    margin-top: 10vh;
+}
+.card{
+    width: 25vw;
+    height: 80vh;
+}
+.display{
+    height: 30vh;
+    text-align: right;
+}
+h1 input{
+    margin-left: 1vw;
+    width: 4.5vw;
+    font-size: 0.8em;
+}
