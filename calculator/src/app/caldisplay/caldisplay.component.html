@@ -1,6 +1,10 @@
-<div class="container">
-  <div class="card">
-    <input type="text" class="display">
+<!-- container -->
+<div class="containers">
+    <!-- calculator-layout -->
+  <div class="card" [ngClass] = "{'darkmode': toggle}">
+      <!-- display screen -->
+    <input type="text" class="display" [ngClass] = "{'darkmode': toggle}">
+    <!-- buttons -->
     <div class="card-body">
           <h1>
             <input type="button" value="AC">
@@ -29,10 +33,11 @@
           <h1>
             <input type="button" value="0">
             <input type="button" value=".">
-            <input type="button" value="">
+            <input type="button" value=" ">
             <input type="button" value="=">
           </h1>
-
+          <!-- Toggle -->
+          <button (click)= "toggle = !toggle"><i class="fas fa-adjust"></i></button>
     </div>
   </div>
 </div>

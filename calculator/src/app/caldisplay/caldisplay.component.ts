@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CaldisplayComponent implements OnInit {
   constructor() { }
-
+toggle = true;
   ngOnInit(): void {
   }
 

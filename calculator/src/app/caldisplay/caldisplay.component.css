@@ -1,3 +1,4 @@
+/* container */
 .containers{
     margin-left: 38vw;
     margin-top: 10vh;
@@ -6,6 +7,8 @@
     width: 25vw;
     height: 80vh;
 }
+
+/* display screen */
 .display{
     height: 30vh;
     text-align: right;
@@ -14,4 +17,13 @@ h1 input{
     margin-left: 1vw;
     width: 4.5vw;
     font-size: 0.8em;
+}
+
+/* toggle color */
+.darkmode{
+    background-color: #000000;
+    color: #ffffff;
+}
+button{
+    margin-left: 10vw;
 }
