@@ -12,6 +12,8 @@
 .display{
     height: 30vh;
     text-align: right;
+    color: #8a2be2;
+    font-size: 3em;
 }
 h1 input{
     margin-left: 1vw;
@@ -22,8 +24,65 @@ h1 input{
 /* toggle color */
 .darkmode{
     background-color: #000000;
-    color: #ffffff;
 }
+.darkmode #row1, .darkmode #row2, .darkmode #row3,.darkmode #posneg, .darkmode #percent {
+  color: #ffffff;
+}
+.darkmode .display {
+  color: #8a2be2;
+}
+/* operation button */
 button{
-    margin-left: 10vw;
+    margin-left: 4vw;
 }
+.mat-fab {
+  background-color: gray;
+  color: #000000;
+}
+/* Toggle button */
+#toggle {
+  margin-left: 10vw;
+}
+/* value button */
+h1{
+    display: flex;
+}
+p{
+  text-decoration: none;
+  color: #000000;
+}
+#row1 {
+  margin-left: 3vw;
+  margin-top: 2vh;
+  cursor: pointer;
+}
+#row2, #row3{
+  margin-left: 4vw;
+  margin-top: 2vh;
+  cursor: pointer;
+}
+/* result button */
+#resultbtn {
+  margin-left: 4vw;
+  background-color: #8a2be2;
+  color: #ffffff;
+}
+/* clear button */
+#clear {
+  margin-left: 2.3vw;
+  margin-top: 2vh;
+  color: #8a2be2;
+  cursor: pointer;
+}
+/* positive/negative button */
+#posneg {
+  margin-left: 2.5vw;
+  margin-top: 2vh;
+  cursor: pointer;
+}
+/* percentage button */
+#percent {
+  margin-left: 3vw;
+  margin-top: 2vh;
+  cursor: pointer;
+}  
