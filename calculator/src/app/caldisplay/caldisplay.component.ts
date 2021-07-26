@@ -7,88 +7,95 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CaldisplayComponent implements OnInit {
 constructor() { }
+
 // variables
 toggle = true;
 screen = "";
-a:any;
-b:any;
-c:any;
-d=0;
+array: any = [];
+res:any;
 
 // get value
 value(number:any) {
-  if ((this.b == '+') || (this.b == '-') || (this.b == '*') || (this.b == '/')) {
-    this.d=this.d+Number(number);
-    this.screen=this.screen+number;
-    this.c=this.d;
+  if(this.array.length === 0 && typeof(number) === 'string') {
+    return;
+  }
+  this.screen = this.screen + (number === 10? '.' : number);
+  if(Number(this.array[this.array.length-1]) && Number(number)) {
+    if (number === 10) {
+      console.log(number);
+      
+      number = '.';
+      console.log(number);
+    }
+  this.array[this.array.length -1] = (this.array[this.array.length-1].toString() + number)
   }
   else {
-    this.screen=this.screen+number;
-    this.a=this.screen;
+    this.array.push(number);
   }
-}
-
-// get condition
-condition(value:any) {
-  this.screen=this.screen+value;
-  this.b=value;
+    console.log(this.array);
 }
 
 // give result
 result() {
-  if ((this.screen[this.screen.length-1] == '+') || (this.screen[this.screen.length-1] == '-') || (this.screen[this.screen.length-1] == '*') || (this.screen[this.screen.length-1] == '/')) return;
-  if (this.b=='+') {
-    console.log(this.a,this.c);
-    this.screen=(Number(this.a)+Number(this.c))+"";
-  }
-  if (this.b=='-') {
-    console.log(this.a,this.c);
-    this.screen=(Number(this.a)-Number(this.c))+"";
-  }
-  if (this.b=='*') {
-    console.log(this.a,this.c);
-    this.screen=(Number(this.a)*Number(this.c))+"";
-  }
-  if (this.b=='/') {
-    console.log(this.a,this.c);
-    this.screen=(Number(this.a)/Number(this.c))+"";
-  }
-  if (this.b=='%') {
-    this.screen= (Number(this.a/100))+"";
-  }
+    if ((this.array[this.array.length-1] == '+') || (this.array[this.array.length-1] == '-') || (this.array[this.array.length-1] == '*') || (this.array[this.array.length-1] == '/')) return;
+    let operanarray1 = Number(this.array[0]);
+    this.array.forEach((element:any,inarrayex:any) => {
+    console.log(element);
+    const num = Number(this.array[inarrayex+1]);
+
+    switch (element){
+      case '+':
+      operanarray1 = operanarray1 + num; 
+      break; 
+      case '-': 
+      operanarray1 = operanarray1 - num; 
+      break;
+      case '*': 
+      operanarray1 = operanarray1 * num;
+      break;
+      case '/': 
+      operanarray1 = operanarray1 / num;
+      break;
+      case '%': 
+      operanarray1 = operanarray1 / 100;
+      break;
+    }
+  });
+  this.screen = operanarray1.toString();
 }
 
-// clear from last input
+// // clear from last input
 clear() {
   if (this.screen != "") {
     this.screen=this.screen.substr(0, this.screen.length-1);
   }
 }
 
-// provide decimal
-getDecimal() {
+// // proviarraye arrayecimal
+getarrayecimal() {
   if (!this.screen.includes('.')) {
     this.screen += '.';
   }
 }
-// convert positive to negative & vice-versa
+// // convert positive to negative & vice-versa
 posneg() {
-  if (!this.screen.includes('-')) {
-    this.screen = '-' + this.screen;
-    this.a = this.screen;
-  }
-  else if(this.screen[0]==='-') {
-    this.screen = this.screen.replace('-','');
+  if (this.array.length === 0) return; 
+  if(Number(this.array[this.array.length-1])){
+    if(Number(this.array[this.array.length-1]) > 0) {
+    this.array[this.array.length-1] = this.array[this.array.length-1] * -1;
+    this.screen = this.array.join('');
+    }
+  else if(Number(this.array[this.array.length-1]) < 0) {
+    this.array[this.array.length-1] = this.array[this.array.length-1] * -1;
+    this.screen = this.array.join('');
   }
 }
+}
 
-// Clear full screen
+// // Clear full screen
 clearAll() {
   this.screen="";
-  this.a="";
-  this.b="";
-  this.c="";
-  this.d=0;
+  this.array=[];
 }
 
   ngOnInit(): void {
