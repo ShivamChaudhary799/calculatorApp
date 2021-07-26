@@ -12,14 +12,13 @@ constructor() { }
 toggle = true;
 screen = "";
 array: any = [];
-res:any;
 
 // get value
 value(number:any) {
   if(this.array.length === 0 && typeof(number) === 'string') {
     return;
   }
-  this.screen = this.screen + (number === 10? '.' : number);
+  this.screen = this.screen + (number === 10 ? '.' : number);
   if(Number(this.array[this.array.length-1]) && Number(number)) {
     if (number === 10) {
       console.log(number);
