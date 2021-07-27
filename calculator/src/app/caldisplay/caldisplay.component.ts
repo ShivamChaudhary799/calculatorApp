@@ -12,13 +12,14 @@ constructor() { }
 toggle = true;
 screen = "";
 array: any = [];
+res:any;
 
 // get value
 value(number:any) {
   if(this.array.length === 0 && typeof(number) === 'string') {
     return;
   }
-  this.screen = this.screen + (number === 10 ? '.' : number);
+  this.screen = this.screen + (number === 10? '.' : number);
   if(Number(this.array[this.array.length-1]) && Number(number)) {
     if (number === 10) {
       console.log(number);
@@ -36,6 +37,7 @@ value(number:any) {
 
 // give result
 result() {
+    if(this.array.length === 0) return;
     if ((this.array[this.array.length-1] == '+') || (this.array[this.array.length-1] == '-') || (this.array[this.array.length-1] == '*') || (this.array[this.array.length-1] == '/')) return;
     let operanarray1 = Number(this.array[0]);
     this.array.forEach((element:any,inarrayex:any) => {
@@ -67,6 +69,8 @@ result() {
 clear() {
   if (this.screen != "") {
     this.screen=this.screen.substr(0, this.screen.length-1);
+    this.array.pop();
+    console.log(this.array);
   }
 }
 

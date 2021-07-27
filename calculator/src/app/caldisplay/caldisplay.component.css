@@ -63,7 +63,7 @@ p{
 }
 /* result button */
 #resultbtn {
-  margin-left: 4vw;
+  margin-left: 3.6vw;
   background-color: #8a2be2;
   color: #ffffff;
 }
@@ -76,7 +76,7 @@ p{
 }
 /* positive/negative button */
 #posneg {
-  margin-left: 2.5vw;
+  margin-left: 3.7vw;
   margin-top: 2vh;
   cursor: pointer;
 }

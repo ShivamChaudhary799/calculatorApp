@@ -8,7 +8,7 @@
   <div class="card-body">
         <h1>
           <p id="clear" value="AC" (click) = "clearAll()">AC</p>
-          <p id="posneg" value="+/-" (click)="posneg()">+/-</p>
+          <p id="row3" value="<-" (click) = "clear()"><-</p>
           <p id="percent" value="%" (click)="value('%')">%</p>
                 <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="value('/')">
                   <mat-icon>/</mat-icon>
@@ -41,7 +41,7 @@
         <h1>
           <p id="row1" value="0" (click)="value(0)">0</p>
           <p id="row2" value="." (click)="value(10)">.</p>
-          <p id="row3" value="<-" (click) = "clear()"><-</p>
+          <p id="posneg" value="+/-" (click)="posneg()">+/-</p>
           <button id="resultbtn" mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="result()">
             <mat-icon>=</mat-icon>
           </button>
