@@ -3,46 +3,47 @@
   <!-- calculator-layout -->
 <div class="card" [ngClass] = "{'darkmode': toggle}">
     <!-- display screen -->
-  <input type="text" class="display" [ngClass] = "{'darkmode': toggle}" [(ngModel)]= "screen">
+  <!-- <input type="text" class="display" [ngClass] = "{'darkmode': toggle}" [(ngModel)]= "screen"> -->
+  <div class="display" [ngClass] = "{'darkmode': toggle}">{{screen}}</div>
   <!-- buttons -->
   <div class="card-body">
         <h1>
-          <p id="clear" value="AC" (click) = "clearAll()">AC</p>
-          <p id="row3" value="<-" (click) = "clear()"><-</p>
-          <p id="percent" value="%" (click)="value('%')">%</p>
+          <p id="clearall" value="AC" (click) = "value('ac')">AC</p>
+          <p id="backspace" value="<-" (click) = "value('c')"><i class="fas fa-long-arrow-alt-left"></i></p>
+          <p id="percent" value="%" (click) = "value('%')">%</p>
                 <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="value('/')">
                   <mat-icon>/</mat-icon>
                 </button>
         </h1>
         <h1>
-          <p id="row1" value="7" (click)="value(7)">7</p>
-          <p id="row2" value="8" (click)="value(8)">8</p>
-          <p id="row3" value="9" (click)="value(9)">9</p>
+          <p id="row1" value="7" (click)="value('7')">7</p>
+          <p id="row2" value="8" (click)="value('8')">8</p>
+          <p id="row3" value="9" (click)="value('9')">9</p>
           <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="value('*')">
             <mat-icon>*</mat-icon>
           </button>
         </h1>
         <h1>
-          <p id="row1" value="4" (click)="value(4)">4</p>
-          <p id="row2" value="5" (click)="value(5)">5</p>
-          <p id="row3" value="6" (click)="value(6)">6</p>
+          <p id="row1" value="4" (click)="value('4')">4</p>
+          <p id="row2" value="5" (click)="value('5')">5</p>
+          <p id="row3" value="6" (click)="value('6')">6</p>
           <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="value('-')">
             <mat-icon>-</mat-icon>
           </button>
         </h1>
         <h1>
-          <p id="row1" value="1" (click)="value(1)">1</p>
-          <p id="row2" value="2" (click)="value(2)">2</p>
-          <p id="row3" value="3" (click)="value(3)">3</p>
+          <p id="row1" value="1" (click)="value('1')">1</p>
+          <p id="row2" value="2" (click)="value('2')">2</p>
+          <p id="row3" value="3" (click)="value('3')">3</p>
           <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="value('+')">
             <mat-icon>+</mat-icon>
           </button>
         </h1>
         <h1>
-          <p id="row1" value="0" (click)="value(0)">0</p>
-          <p id="row2" value="." (click)="value(10)">.</p>
-          <p id="posneg" value="+/-" (click)="posneg()">+/-</p>
-          <button id="resultbtn" mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="result()">
+          <p id="row1" value="0" (click)="value('0')">0</p>
+          <p id="row2" value="." (click)="value('.')">.</p>
+          <p id="posneg" value="+/-" (click)="value('+/-')">+/-</p>
+          <button id="resultbtn" mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="value('=')">
             <mat-icon>=</mat-icon>
           </button>
         </h1>

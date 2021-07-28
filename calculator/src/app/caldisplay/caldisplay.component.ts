@@ -8,98 +8,230 @@ import { Component, OnInit } from '@angular/core';
 export class CaldisplayComponent implements OnInit {
 constructor() { }
 
-// variables
 toggle = true;
-screen = "";
-array: any = [];
-res:any;
+  screen = '';
+  firstvalue: any = null;
+  operator: any = null;
+  newCursor = false;
+  isc = false;
+  iscomma = false;
 
-// get value
-value(number:any) {
-  if(this.array.length === 0 && typeof(number) === 'string') {
-    return;
-  }
-  this.screen = this.screen + (number === 10? '.' : number);
-  if(Number(this.array[this.array.length-1]) && Number(number)) {
-    if (number === 10) {
-      console.log(number);
-      
-      number = '.';
-      console.log(number);
-    }
-  this.array[this.array.length -1] = (this.array[this.array.length-1].toString() + number)
-  }
-  else {
-    this.array.push(number);
-  }
-    console.log(this.array);
-}
-
-// give result
-result() {
-    if(this.array.length === 0) return;
-    if ((this.array[this.array.length-1] == '+') || (this.array[this.array.length-1] == '-') || (this.array[this.array.length-1] == '*') || (this.array[this.array.length-1] == '/')) return;
-    let operanarray1 = Number(this.array[0]);
-    this.array.forEach((element:any,inarrayex:any) => {
-    console.log(element);
-    const num = Number(this.array[inarrayex+1]);
-
-    switch (element){
+  value(num: any) {
+    switch (num) {
+      case 'ac':
+        this.screen = '';
+        this.firstvalue = null;
+        this.operator = null;
+        this.newCursor = false;
+        this.iscomma = false;
+        break;
+      case 'c':
+        // this.screen = '0';
+        this.screen=this.screen.substr(0, this.screen.length-1);
+        this.isc = false;
+        this.iscomma = false;
+        break;
+      case '+/-':
+        if (Math.sign(parseInt(this.screen)) === 1) {
+          const sign = -Math.abs(parseInt(this.screen));
+          this.screen = sign.toString();
+        } else if (Math.sign(parseInt(this.screen)) === -1) {
+          const sign = Math.abs(parseInt(this.screen));
+          this.screen = sign.toString();
+        } else {
+          this.screen = this.screen;
+        }
+        break;
+      case '%':
+        this.addOperator('%');
+        break;
       case '+':
-      operanarray1 = operanarray1 + num; 
-      break; 
-      case '-': 
-      operanarray1 = operanarray1 - num; 
-      break;
-      case '*': 
-      operanarray1 = operanarray1 * num;
-      break;
-      case '/': 
-      operanarray1 = operanarray1 / num;
-      break;
-      case '%': 
-      operanarray1 = operanarray1 / 100;
-      break;
+        this.addOperator('+');
+        break;
+      case '-':
+        this.addOperator('-');
+        break;
+      case '*':
+        this.addOperator('*');
+        break;
+      case '/':
+        this.addOperator('/');
+        break;
+      case '=':
+        if (this.firstvalue !== null && this.operator !== null) {
+          this.result();
+        }
+        this.operator === null;
+        break;
+      case '1':
+        this.addNumber('1');
+        break;
+      case '2':
+        this.addNumber('2');
+        break;
+      case '3':
+        this.addNumber('3');
+        break;
+      case '4':
+        this.addNumber('4');
+        break;
+      case '5':
+        this.addNumber('5');
+        break;
+      case '6':
+        this.addNumber('6');
+        break;
+      case '7':
+        this.addNumber('7');
+        break;
+      case '8':
+        this.addNumber('8');
+        break;
+      case '9':
+        this.addNumber('9');
+        break;
+      case '0':
+        this.addNumber('0');
+        break;
+      case '.':
+        this.addComma();
+        break;
+      default:
+        break;
     }
-  });
-  this.screen = operanarray1.toString();
-}
-
-// // clear from last input
-clear() {
-  if (this.screen != "") {
-    this.screen=this.screen.substr(0, this.screen.length-1);
-    this.array.pop();
-    console.log(this.array);
   }
-}
 
-// // proviarraye arrayecimal
-getarrayecimal() {
-  if (!this.screen.includes('.')) {
-    this.screen += '.';
-  }
-}
-// // convert positive to negative & vice-versa
-posneg() {
-  if (this.array.length === 0) return; 
-  if(Number(this.array[this.array.length-1])){
-    if(Number(this.array[this.array.length-1]) > 0) {
-    this.array[this.array.length-1] = this.array[this.array.length-1] * -1;
-    this.screen = this.array.join('');
+  addComma() {
+    if(this.iscomma === false) {
+      this.iscomma = true;
+      this.screen = this.screen + '.';
     }
-  else if(Number(this.array[this.array.length-1]) < 0) {
-    this.array[this.array.length-1] = this.array[this.array.length-1] * -1;
-    this.screen = this.array.join('');
+    else {
+      this.screen = this.screen;
+    }
   }
-}
-}
 
-// // Clear full screen
-clearAll() {
-  this.screen="";
-  this.array=[];
-}
+  addNumber(number: any) {
+    if(number === '0') {
+      if(this.newCursor === true) {
+        this.screen = number;
+        this.newCursor = false;
+      }
+      else if(this.screen !== '0') {
+        if(this.iscomma === true) {
+          this.screen = `${this.screen.toString()}.${number}`;
+        }
+        else {
+          this.screen = this.screen.toString() + number;
+        }
+      }
+      else if(this.screen === '0') {
+        if(this.iscomma === true) {
+          this.screen = `${this.screen.toString()}.${number}`;
+        }
+      }
+    }
+    else {
+      if(this.newCursor === true) {
+        this.screen = this.screen + number;
+        this.newCursor = false;
+      } else if(this.screen === '0') {
+        if(this.iscomma === true) {
+          if(this.screen.toString().indexOf('.') > -1) {
+            this.screen = this.screen.toString() + number;
+          }
+          else {
+            this.screen = `${this.screen.toString()}.${number}`;
+          }
+        }
+        else {
+          this.screen = number;
+        }
+      }
+      else {
+        if(this.iscomma === true) {
+          if(this.screen.toString().indexOf('.') > -1) {
+            this.screen = this.screen.toString() + number;
+          }
+          else {
+            this.screen = `${this.screen.toString()}.${number}`;
+          }
+        }
+        else {
+          this.screen = this.screen.toString() + number;
+        }
+      }
+    }
+    this.isc = true;
+  }
+
+  addOperator(op: string) {
+    // console.log(this.screen[this.screen.length-1]);
+    if ((this.screen[this.screen.length-1] === '+') || (this.screen[this.screen.length-1] === '-') || (this.screen[this.screen.length-1] === '*') || (this.screen[this.screen.length-1] === '/') || (this.screen[this.screen.length-1] === '%')) return;
+    this.screen = this.screen + op;
+    if(this.newCursor === false) {
+      if(this.firstvalue === null) {
+        if(this.iscomma === true) {
+          this.firstvalue = parseFloat(this.screen);
+        }
+        else {
+          this.firstvalue = parseInt(this.screen);
+        }
+      }
+      if(this.firstvalue !== null && this.operator !== null) {
+        this.result();
+      }
+    }
+    this.iscomma = false;
+    this.operator = op;
+    this.newCursor = true;
+  }
+
+  result() {
+    switch(this.operator) {
+      case '+':
+        if(this.iscomma === true) {
+          this.firstvalue = eval(this.screen);
+        }
+        else {
+          this.firstvalue = eval(this.screen);
+        }
+        break;
+        case '-':
+        if(this.iscomma === true) {
+          this.firstvalue = eval(this.screen);
+        }
+        else {
+          this.firstvalue = eval(this.screen);
+        }
+        break;
+        case '*':
+        if(this.iscomma === true) {
+          this.firstvalue = eval(this.screen);
+        }
+        else {
+          this.firstvalue = eval(this.screen);
+        }
+        break;
+        case '/':
+        if(this.iscomma === true) {
+          this.firstvalue = eval(this.screen);
+        }
+        else {
+          this.firstvalue = eval(this.screen);
+        }
+        break;
+        case '%':
+          if(this.iscomma === true) {
+            this.firstvalue = (this.firstvalue)/100;
+          }
+          else {
+            this.firstvalue = (this.firstvalue)/100;
+          }
+          break;
+    }
+    this.screen = (this.firstvalue).toString();
+  }
 
   ngOnInit(): void {
   }
