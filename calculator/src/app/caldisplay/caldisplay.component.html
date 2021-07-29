@@ -12,7 +12,7 @@
           <p value="(" (click) = "openbracket()">(</p>
           <p value=")" (click) = "closebracket()">)</p>
           <p value="AC" (click) = "allclear()">AC</p>
-          <p value="<-" (click) = "backspace()"><i class="fas fa-backspace"></i></p>
+          <p value="<-" (click) = "backspace()">CE</p>
           <p value="%" (click) = "addOperator('%')">%</p>
                 <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="addOperator('/')">
                   <mat-icon><i class="fas fa-divide"></i></mat-icon>
@@ -20,7 +20,7 @@
         </h1>
         <h1>
           <p value="7">Deg</p>
-          <p value="Sin" (click)="value('Sin')">Sin</p>
+          <p value="Sin" (click)="trig('Sin')">Sin</p>
           <p value="7">x!</p>
           <p value="7" (click)="addNumber('7')">7</p>
           <p value="8" (click)="addNumber('8')">8</p>

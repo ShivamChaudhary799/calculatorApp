@@ -51,11 +51,6 @@ constructor() { }
         }
         this.operator === null;
         break;
-        case 'Sin':
-          this.screen = this.screen + num;
-          if(this.screen === 'sin90') {
-            this.screen = '1';
-          }
     }
   }
 
@@ -149,6 +144,11 @@ constructor() { }
     this.newCursor = true;
   }
 
+  trig(check: any) {
+    this.screen = this.screen + check;
+
+    this.operator = check;
+  }
   result() {
     switch(this.operator) {
       case '+':
@@ -191,9 +191,20 @@ constructor() { }
             this.firstvalue = (this.firstvalue)/100;
           }
           break;
+          case 'Sin': 
+          if(this.screen === 'Sin90'){
+            this.screen = '1';
+          }
     }
     this.screen = (this.firstvalue).toString();
   }
+
+  // trig(check: any) {
+  //         this.screen = this.screen + 'Sin';
+  //         if(this.screen === 'Sin90') {
+  //           this.screen = '1';
+  //         }
+  // }
 
   ngOnInit(): void {
   }
