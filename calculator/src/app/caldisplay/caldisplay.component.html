@@ -8,43 +8,58 @@
   <!-- buttons -->
   <div class="card-body">
         <h1>
-          <p id="clearall" value="AC" (click) = "value('ac')">AC</p>
-          <p id="backspace" value="<-" (click) = "value('c')"><i class="fas fa-long-arrow-alt-left"></i></p>
-          <p id="percent" value="%" (click) = "value('%')">%</p>
-                <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="value('/')">
-                  <mat-icon>/</mat-icon>
+          <p id="row1" value="7">Rad</p>
+          <p value="(" (click) = "openbracket()">(</p>
+          <p value=")" (click) = "closebracket()">)</p>
+          <p value="AC" (click) = "allclear()">AC</p>
+          <p value="<-" (click) = "backspace()"><i class="fas fa-backspace"></i></p>
+          <p value="%" (click) = "addOperator('%')">%</p>
+                <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="addOperator('/')">
+                  <mat-icon><i class="fas fa-divide"></i></mat-icon>
                 </button>
         </h1>
         <h1>
-          <p id="row1" value="7" (click)="value('7')">7</p>
-          <p id="row2" value="8" (click)="value('8')">8</p>
-          <p id="row3" value="9" (click)="value('9')">9</p>
-          <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="value('*')">
-            <mat-icon>*</mat-icon>
+          <p value="7">Deg</p>
+          <p value="Sin" (click)="value('Sin')">Sin</p>
+          <p value="7">x!</p>
+          <p value="7" (click)="addNumber('7')">7</p>
+          <p value="8" (click)="addNumber('8')">8</p>
+          <p value="9" (click)="addNumber('9')">9</p>
+          <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="addOperator('*')">
+            <mat-icon><i class="fas fa-times"></i></mat-icon>
           </button>
         </h1>
         <h1>
-          <p id="row1" value="4" (click)="value('4')">4</p>
-          <p id="row2" value="5" (click)="value('5')">5</p>
-          <p id="row3" value="6" (click)="value('6')">6</p>
-          <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="value('-')">
-            <mat-icon>-</mat-icon>
+          <p value="7">Inv</p>
+          <p value="7">Cos</p>
+          <p value="7">log</p>
+          <p value="4" (click)="addNumber('4')">4</p>
+          <p value="5" (click)="addNumber('5')">5</p>
+          <p value="6" (click)="addNumber('6')">6</p>
+          <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="addOperator('-')">
+            <mat-icon><i class="fas fa-minus"></i></mat-icon>
           </button>
         </h1>
         <h1>
-          <p id="row1" value="1" (click)="value('1')">1</p>
-          <p id="row2" value="2" (click)="value('2')">2</p>
-          <p id="row3" value="3" (click)="value('3')">3</p>
-          <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="value('+')">
-            <mat-icon>+</mat-icon>
+          <p value="7">𝛑<i class="far fa-pi"></i></p>
+          <p value="7">Tan</p>
+          <p value="7">x²</p>
+          <p value="1" (click)="addNumber('1')">1</p>
+          <p value="2" (click)="addNumber('2')">2</p>
+          <p value="3" (click)="addNumber('3')">3</p>
+          <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="addOperator('+')">
+            <mat-icon><i class="fas fa-plus"></i></mat-icon>
           </button>
         </h1>
         <h1>
-          <p id="row1" value="0" (click)="value('0')">0</p>
-          <p id="row2" value="." (click)="value('.')">.</p>
-          <p id="posneg" value="+/-" (click)="value('+/-')">+/-</p>
+          <p value="7">e</p>
+          <p value="7">EXP</p>
+          <p value="7"><i class="fas fa-square-root-alt"></i></p>
+          <p value="0" (click)="addNumber('0')">0</p>
+          <p value="." (click)="addComma()">.</p>
+          <p value="+/-" (click)="posneg()">+/-</p>
           <button id="resultbtn" mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="value('=')">
-            <mat-icon>=</mat-icon>
+            <mat-icon><i class="fas fa-equals"></i></mat-icon>
           </button>
         </h1>
         <!-- Toggle -->

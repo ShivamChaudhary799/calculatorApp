@@ -1,10 +1,10 @@
 /* container */
 .containers{
-  margin-left: 38vw;
+  margin-left: 30vw;
   margin-top: 10vh;
 }
 .card{
-  width: 25vw;
+  width: 45vw;
   height: 90vh;
 }
 
@@ -21,15 +21,11 @@
 .darkmode{
   background-color: #000000;
 }
-.darkmode #row1, .darkmode #row2, .darkmode #row3,.darkmode #posneg, .darkmode #percent, .darkmode #backspace {
+.darkmode p {
 color: #ffffff;
 }
 .darkmode .display {
 color: #8a2be2;
-}
-/* operation button */
-button{
-  margin-left: 4vw;
 }
 .mat-fab {
 background-color: gray;
@@ -37,53 +33,16 @@ color: #000000;
 }
 /* Toggle button */
 #toggle {
-margin-left: 10vw;
+margin-left: 19vw;
+font-size: 2em;
 }
 /* value button */
-h1{
-  display: flex;
-}
 p{
 text-decoration: none;
 color: #000000;
 }
-#row1 {
-margin-left: 3vw;
-margin-top: 2vh;
-cursor: pointer;
+h1{
+  display: grid;
+  grid-template-columns: repeat(7,6vw);
+  justify-items: center;
 }
-#row2, #row3{
-margin-left: 4vw;
-margin-top: 2vh;
-cursor: pointer;
-}
-/* result button */
-#resultbtn {
-margin-left: 3.6vw;
-background-color: #8a2be2;
-color: #ffffff;
-}
-/* clear button */
-#backspace {
-margin-left: 3.2vw;
-margin-top: 2vh;
-cursor: pointer;
-}
-#clearall {
-margin-left: 2.3vw;
-margin-top: 2vh;
-color: #8a2be2;
-cursor: pointer;
-}
-/* positive/negative button */
-#posneg {
-margin-left: 3.7vw;
-margin-top: 2vh;
-cursor: pointer;
-}
-/* percentage button */
-#percent {
-margin-left: 3vw;
-margin-top: 2vh;
-cursor: pointer;
-}  

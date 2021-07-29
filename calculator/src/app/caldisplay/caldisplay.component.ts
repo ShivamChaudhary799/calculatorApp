@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class CaldisplayComponent implements OnInit {
 constructor() { }
 
-toggle = true;
+  toggle = true;
   screen = '';
   firstvalue: any = null;
   operator: any = null;
@@ -16,88 +16,46 @@ toggle = true;
   isc = false;
   iscomma = false;
 
+
+  allclear() {
+    this.screen = '';
+    this.firstvalue = null;
+    this.operator = null;
+    this.newCursor = false;
+    this.iscomma = false;
+  }
+
+  backspace() {
+    this.screen=this.screen.substr(0, this.screen.length-1);
+    this.isc = false;
+    this.iscomma = false;
+  }
+
+  posneg() {
+    if (Math.sign(parseInt(this.screen)) === 1) {
+      const sign = -Math.abs(parseInt(this.screen));
+      this.screen = sign.toString();
+    } else if (Math.sign(parseInt(this.screen)) === -1) {
+      const sign = Math.abs(parseInt(this.screen));
+      this.screen = sign.toString();
+    } else {
+      this.screen = this.screen;
+    }
+  }
+
   value(num: any) {
     switch (num) {
-      case 'ac':
-        this.screen = '';
-        this.firstvalue = null;
-        this.operator = null;
-        this.newCursor = false;
-        this.iscomma = false;
-        break;
-      case 'c':
-        // this.screen = '0';
-        this.screen=this.screen.substr(0, this.screen.length-1);
-        this.isc = false;
-        this.iscomma = false;
-        break;
-      case '+/-':
-        if (Math.sign(parseInt(this.screen)) === 1) {
-          const sign = -Math.abs(parseInt(this.screen));
-          this.screen = sign.toString();
-        } else if (Math.sign(parseInt(this.screen)) === -1) {
-          const sign = Math.abs(parseInt(this.screen));
-          this.screen = sign.toString();
-        } else {
-          this.screen = this.screen;
-        }
-        break;
-      case '%':
-        this.addOperator('%');
-        break;
-      case '+':
-        this.addOperator('+');
-        break;
-      case '-':
-        this.addOperator('-');
-        break;
-      case '*':
-        this.addOperator('*');
-        break;
-      case '/':
-        this.addOperator('/');
-        break;
       case '=':
         if (this.firstvalue !== null && this.operator !== null) {
           this.result();
         }
         this.operator === null;
         break;
-      case '1':
-        this.addNumber('1');
-        break;
-      case '2':
-        this.addNumber('2');
-        break;
-      case '3':
-        this.addNumber('3');
-        break;
-      case '4':
-        this.addNumber('4');
-        break;
-      case '5':
-        this.addNumber('5');
-        break;
-      case '6':
-        this.addNumber('6');
-        break;
-      case '7':
-        this.addNumber('7');
-        break;
-      case '8':
-        this.addNumber('8');
-        break;
-      case '9':
-        this.addNumber('9');
-        break;
-      case '0':
-        this.addNumber('0');
-        break;
-      case '.':
-        this.addComma();
-        break;
-      default:
-        break;
+        case 'Sin':
+          this.screen = this.screen + num;
+          if(this.screen === 'sin90') {
+            this.screen = '1';
+          }
     }
   }
 
@@ -111,17 +69,22 @@ toggle = true;
     }
   }
 
+  openbracket() {
+    this.screen = this.screen + '(';
+  }
+
+  closebracket() {
+    this.screen = this.screen + ')';
+  }
+
   addNumber(number: any) {
-    if(number === '0') {
+    if(0) {
       if(this.newCursor === true) {
         this.screen = number;
         this.newCursor = false;
       }
       else if(this.screen !== '0') {
         if(this.iscomma === true) {
-          this.screen = `${this.screen.toString()}.${number}`;
-        }
-        else {
           this.screen = this.screen.toString() + number;
         }
       }
@@ -166,7 +129,6 @@ toggle = true;
   }
 
   addOperator(op: string) {
-    // console.log(this.screen[this.screen.length-1]);
     if ((this.screen[this.screen.length-1] === '+') || (this.screen[this.screen.length-1] === '-') || (this.screen[this.screen.length-1] === '*') || (this.screen[this.screen.length-1] === '/') || (this.screen[this.screen.length-1] === '%')) return;
     this.screen = this.screen + op;
     if(this.newCursor === false) {
