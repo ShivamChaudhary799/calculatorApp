@@ -15,6 +15,7 @@ constructor() { }
   newCursor = false;
   isc = false;
   iscomma = false;
+  ans: any;
 
 
   allclear() {
@@ -144,11 +145,6 @@ constructor() { }
     this.newCursor = true;
   }
 
-  trig(check: any) {
-    this.screen = this.screen + check;
-
-    this.operator = check;
-  }
   result() {
     switch(this.operator) {
       case '+':
@@ -191,20 +187,29 @@ constructor() { }
             this.firstvalue = (this.firstvalue)/100;
           }
           break;
-          case 'Sin': 
-          if(this.screen === 'Sin90'){
-            this.screen = '1';
-          }
+          case '!':
+            if(this.iscomma === true) {
+              this.ans=1;
+            for (let i = 1; i <= this.firstvalue; i++)
+                this.ans = this.ans * i;  
+            }
+            else {
+              this.ans=1;
+            for (let i = 1; i <= this.firstvalue; i++)
+                this.ans = this.ans * i;
+            }
+            this.firstvalue = this.ans;
+            break;
     }
     this.screen = (this.firstvalue).toString();
   }
 
-  // trig(check: any) {
+  trig(check: any) {
   //         this.screen = this.screen + 'Sin';
   //         if(this.screen === 'Sin90') {
   //           this.screen = '1';
   //         }
-  // }
+  }
 
   ngOnInit(): void {
   }
