@@ -45,4 +45,5 @@ h1{
   display: grid;
   grid-template-columns: repeat(7,6vw);
   justify-items: center;
+  cursor: pointer;
 }

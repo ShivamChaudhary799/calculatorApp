@@ -20,7 +20,7 @@
         </h1>
         <h1>
           <p value="7">Deg</p>
-          <p value="Sin" (click)="trig('Sin')">Sin</p>
+          <p value="Sin" (click) = "addOperator('Sin')">Sin</p>
           <p value="7" (click) = "addOperator('!')">x!</p>
           <p value="7" (click)="addNumber('7')">7</p>
           <p value="8" (click)="addNumber('8')">8</p>
@@ -31,8 +31,8 @@
         </h1>
         <h1>
           <p value="7">Inv</p>
-          <p value="7">Cos</p>
-          <p value="7">log</p>
+          <p value="Cos" (click) = "addOperator('Cos')">Cos</p>
+          <p value="log" (click) = "addOperator('log(')">log</p>
           <p value="4" (click)="addNumber('4')">4</p>
           <p value="5" (click)="addNumber('5')">5</p>
           <p value="6" (click)="addNumber('6')">6</p>
@@ -41,9 +41,9 @@
           </button>
         </h1>
         <h1>
-          <p value="7">𝛑<i class="far fa-pi"></i></p>
-          <p value="7">Tan</p>
-          <p value="7">x²</p>
+          <p value="𝛑" (click) = "addOperator('𝛑')">𝛑<i class="far fa-pi"></i></p>
+          <p value="Tan" (click) = "addOperator('Tan')">Tan</p>
+          <p value="" (click) = "addOperator('^2')">x²</p>
           <p value="1" (click)="addNumber('1')">1</p>
           <p value="2" (click)="addNumber('2')">2</p>
           <p value="3" (click)="addNumber('3')">3</p>
@@ -54,7 +54,7 @@
         <h1>
           <p value="7">e</p>
           <p value="7">EXP</p>
-          <p value="7"><i class="fas fa-square-root-alt"></i></p>
+          <p value="√" (click) = "addOperator('√')"><i class="fas fa-square-root-alt"></i></p>
           <p value="0" (click)="addNumber('0')">0</p>
           <p value="." (click)="addComma()">.</p>
           <p value="+/-" (click)="posneg()">+/-</p>
