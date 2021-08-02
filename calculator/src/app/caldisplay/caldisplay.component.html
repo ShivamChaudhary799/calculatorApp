@@ -3,7 +3,6 @@
   <!-- calculator-layout -->
 <div class="card" [ngClass] = "{'darkmode': toggle}">
     <!-- display screen -->
-  <!-- <input type="text" class="display" [ngClass] = "{'darkmode': toggle}" [(ngModel)]= "screen"> -->
   <div class="display" [ngClass] = "{'darkmode': toggle}">{{screen}}</div>
   <!-- buttons -->
   <div class="card-body">
@@ -11,7 +10,7 @@
           <p id="row1" value="7">Rad</p>
           <p value="(" (click) = "openbracket()">(</p>
           <p value=")" (click) = "closebracket()">)</p>
-          <p value="AC" (click) = "allclear()">AC</p>
+          <p value="AC" id="allclear" (click) = "allclear()">AC</p>
           <p value="<-" (click) = "backspace()">CE</p>
           <p value="%" (click) = "addOperator('%')">%</p>
                 <button mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="addOperator('/')">
@@ -20,7 +19,8 @@
         </h1>
         <h1>
           <p value="7">Deg</p>
-          <p value="Sin" (click) = "addOperator('Sin')">Sin</p>
+          <p value="Sin(" (click) = "addOperator('Sin(')" *ngIf = "!inverse">Sin</p>
+          <p value="Sin-1(" (click) = "addOperator('Sin-1(')" *ngIf = "inverse">Sin-1</p>
           <p value="7" (click) = "addOperator('!')">x!</p>
           <p value="7" (click)="addNumber('7')">7</p>
           <p value="8" (click)="addNumber('8')">8</p>
@@ -30,9 +30,10 @@
           </button>
         </h1>
         <h1>
-          <p value="7">Inv</p>
-          <p value="Cos" (click) = "addOperator('Cos')">Cos</p>
-          <p value="log" (click) = "addOperator('log(')">log</p>
+          <p value="7" (click) = "inverse = !inverse">Inv</p>
+          <p value="Cos(" (click) = "addOperator('Cos(')" *ngIf = "!inverse">Cos</p>
+          <p value="Cos-1(" (click) = "addOperator('Cos-1(')" *ngIf = "inverse">Cos-1</p>
+          <p value="Log(" (click) = "addOperator('Log(')">log</p>
           <p value="4" (click)="addNumber('4')">4</p>
           <p value="5" (click)="addNumber('5')">5</p>
           <p value="6" (click)="addNumber('6')">6</p>
@@ -42,7 +43,8 @@
         </h1>
         <h1>
           <p value="𝛑" (click) = "addOperator('𝛑')">𝛑<i class="far fa-pi"></i></p>
-          <p value="Tan" (click) = "addOperator('Tan')">Tan</p>
+          <p value="Tan(" (click) = "addOperator('Tan(')" *ngIf = "!inverse">Tan</p>
+          <p value="Tan-1(" (click) = "addOperator('Tan-1(')" *ngIf = "inverse">Tan-1</p>
           <p value="" (click) = "addOperator('^2')">x²</p>
           <p value="1" (click)="addNumber('1')">1</p>
           <p value="2" (click)="addNumber('2')">2</p>
@@ -53,7 +55,7 @@
         </h1>
         <h1>
           <p value="7">e</p>
-          <p value="7">EXP</p>
+          <p value="E" (click) = "addOperator('E')">EXP</p>
           <p value="√" (click) = "addOperator('√')"><i class="fas fa-square-root-alt"></i></p>
           <p value="0" (click)="addNumber('0')">0</p>
           <p value="." (click)="addComma()">.</p>

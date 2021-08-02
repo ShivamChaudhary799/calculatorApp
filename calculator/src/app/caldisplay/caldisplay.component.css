@@ -47,3 +47,9 @@ h1{
   justify-items: center;
   cursor: pointer;
 }
+#allclear {
+  color: #8a2be2;
+}
+#resultbtn {
+  background-color: #8a2be2;
+}
