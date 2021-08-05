@@ -5,12 +5,12 @@
 }
 .card{
   width: 45vw;
-  height: 90vh;
+  height: 100vh;
 }
 
 /* display screen */
 .display{
-  height: 80vh;
+  height: 100vh;
   line-height: 1.2;
   text-align: right;
   color: #8a2be2;
@@ -52,4 +52,7 @@ h1{
 }
 #resultbtn {
   background-color: #8a2be2;
+}
+#inverse {
+  color: #8a2be2;
 }

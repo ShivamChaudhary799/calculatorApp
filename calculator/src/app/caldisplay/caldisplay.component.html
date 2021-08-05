@@ -7,7 +7,7 @@
   <!-- buttons -->
   <div class="card-body">
         <h1>
-          <p id="row1" value="7">Rad</p>
+          <p value="7" (click)="isDegree = isDegree">Rad</p>
           <p value="(" (click) = "openbracket()">(</p>
           <p value=")" (click) = "closebracket()">)</p>
           <p value="AC" id="allclear" (click) = "allclear()">AC</p>
@@ -18,9 +18,9 @@
                 </button>
         </h1>
         <h1>
-          <p value="7">Deg</p>
+          <p  value="" (click)="isDegree = !isDegree">Deg</p>
           <p value="Sin(" (click) = "addOperator('Sin(')" *ngIf = "!inverse">Sin</p>
-          <p value="Sin-1(" (click) = "addOperator('Sin-1(')" *ngIf = "inverse">Sin-1</p>
+          <p id = "inverse" value="Sin-1(" (click) = "addOperator('Sin-1(')" *ngIf = "inverse">Sin-1</p>
           <p value="7" (click) = "addOperator('!')">x!</p>
           <p value="7" (click)="addNumber('7')">7</p>
           <p value="8" (click)="addNumber('8')">8</p>
@@ -32,8 +32,9 @@
         <h1>
           <p value="7" (click) = "inverse = !inverse">Inv</p>
           <p value="Cos(" (click) = "addOperator('Cos(')" *ngIf = "!inverse">Cos</p>
-          <p value="Cos-1(" (click) = "addOperator('Cos-1(')" *ngIf = "inverse">Cos-1</p>
-          <p value="Log(" (click) = "addOperator('Log(')">log</p>
+          <p id = "inverse" value="Cos-1(" (click) = "addOperator('Cos-1(')" *ngIf = "inverse">Cos-1</p>
+          <p value="Log(" (click) = "addOperator('Log(')" *ngIf = "!inverse">log</p>
+          <p id = "inverse" value="10^" (click) = "addOperator('10^')" *ngIf = "inverse">ٰ‎ٰ‎10ⁿ</p>
           <p value="4" (click)="addNumber('4')">4</p>
           <p value="5" (click)="addNumber('5')">5</p>
           <p value="6" (click)="addNumber('6')">6</p>
@@ -42,9 +43,9 @@
           </button>
         </h1>
         <h1>
-          <p value="𝛑" (click) = "addOperator('𝛑')">𝛑<i class="far fa-pi"></i></p>
+          <p value="𝛑" (click) = "addOperator('𝛑')">𝛑</p>
           <p value="Tan(" (click) = "addOperator('Tan(')" *ngIf = "!inverse">Tan</p>
-          <p value="Tan-1(" (click) = "addOperator('Tan-1(')" *ngIf = "inverse">Tan-1</p>
+          <p id = "inverse" value="Tan-1(" (click) = "addOperator('Tan-1(')" *ngIf = "inverse">Tan-1</p>
           <p value="" (click) = "addOperator('^2')">x²</p>
           <p value="1" (click)="addNumber('1')">1</p>
           <p value="2" (click)="addNumber('2')">2</p>
@@ -54,15 +55,23 @@
           </button>
         </h1>
         <h1>
-          <p value="7">e</p>
+          <p value="e" (click) = "addOperator('e')">e</p>
           <p value="E" (click) = "addOperator('E')">EXP</p>
-          <p value="√" (click) = "addOperator('√')"><i class="fas fa-square-root-alt"></i></p>
+          <p value="√" (click) = "addOperator('√(')" *ngIf = "!inverse"><i class="fas fa-square-root-alt"></i></p>
+          <p id = "inverse" value="" (click) = "addOperator('^2')" *ngIf = "inverse">x²</p>
           <p value="0" (click)="addNumber('0')">0</p>
           <p value="." (click)="addComma()">.</p>
           <p value="+/-" (click)="posneg()">+/-</p>
           <button id="resultbtn" mat-fab color="primary" aria-label="Example icon button with a menu icon" (click)="value('=')">
             <mat-icon><i class="fas fa-equals"></i></mat-icon>
           </button>
+        </h1>
+        <h1>
+          <p value="Ans" (click) = "Answer()" *ngIf = "!inverse">Ans</p>
+          <p id = "inverse" value="Rnd" (click) = "random()" *ngIf = "inverse">Rnd</p>
+          <p value="ln" (click) = "addOperator('ln(')">ln</p>
+          <p value="" (click) = "addOperator('^3')" *ngIf = "!inverse">x³</p>
+          <p id="inverse" value="" (click) = "addOperator('3√(')" *ngIf = "inverse">3√(</p>
         </h1>
         <!-- Toggle -->
         <button id="toggle" (click)= "toggle = !toggle"><i class="fas fa-adjust"></i></button>
