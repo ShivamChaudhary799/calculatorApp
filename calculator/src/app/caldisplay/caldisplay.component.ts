@@ -31,6 +31,7 @@ export class CaldisplayComponent implements OnInit {
   // converting a number from radian to degree
   isDegree = false;
 
+  sign:any;
   // For clearing a whole display screen
   allclear() {
     this.screen = '';
@@ -49,15 +50,12 @@ export class CaldisplayComponent implements OnInit {
 
   // For converting a number from positive to negative & vice-versa
   posneg() {
-    if (Math.sign(parseInt(this.screen)) === 1) {
-      const sign = -Math.abs(parseInt(this.screen));
-      this.screen = sign.toString();
-    } else if (Math.sign(parseInt(this.screen)) === -1) {
-      const sign = Math.abs(parseInt(this.screen));
-      this.screen = sign.toString();
-    } else {
-      this.screen = this.screen;
+    if (parseInt(this.screen[this.screen.length - 1]) > 0) {
+      this.sign = -Math.abs(Number(this.screen[this.screen.length - 1]));
+    } else if (parseInt(this.screen[this.screen.length - 1]) < 0) {
+      this.sign = Math.abs(Number(this.screen[this.screen.length - 1]));
     }
+      this.screen = this.screen.slice(0,this.screen.length - 1) + this.sign.toString();
   }
 
   // for result
@@ -146,13 +144,15 @@ export class CaldisplayComponent implements OnInit {
 
   // for pushing an operator
   addOperator(op: string) {
-    if ((this.screen[this.screen.length - 1] === '+') || (this.screen[this.screen.length - 1] === '-') || (this.screen[this.screen.length - 1] === '*') || (this.screen[this.screen.length - 1] === '/') || (this.screen[this.screen.length - 1] === '%')) return;
-    this.operator.push(op);
     if (op === '𝛑') {
       this.screen = this.screen + op;
+      this.operator.push(op);
     }
-    else
+    else {
+    if ((this.screen[this.screen.length - 1] === '+') || (this.screen[this.screen.length - 1] === '-') || (this.screen[this.screen.length - 1] === '*') || (this.screen[this.screen.length - 1] === '/') || (this.screen[this.screen.length - 1] === '%')) return;
+    this.operator.push(op);
       this.screen = this.screen + op;
+    }
     if (this.newCursor === false) {
       if (this.firstvalue === null) {
         if (this.decimal === true) {
@@ -166,6 +166,7 @@ export class CaldisplayComponent implements OnInit {
         // this.result(this.operator,this.screen);
       }
     }
+  
     this.decimal = false;
     this.newCursor = true;
   }
@@ -174,55 +175,49 @@ export class CaldisplayComponent implements OnInit {
     // For Sine operation
     if (ele.includes('Sin(')) {
       const index = exp.indexOf('Sin(') + 3, end = exp.indexOf(')') === -1 ? exp.length - 1 : exp.indexOf(')');
-      this.firstvalue = Math.sin(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1)));
-      if (this.isDegree === true) {
-        this.firstvalue = (Math.sin(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1)) * 3.14159265359 / 180));
-      }
+      let val = Math.sin(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1)) * (this.isDegree ? 3.14159265359 / 180 : 1));
+      exp = eval(exp.slice(0,index - 3) + (Number(exp[index - 4]) ? '*' : '') +val + (Number(exp[end + 1]) ? "*" : '') + exp.slice(end + 1));
+      this.firstvalue = exp;
       ele = [];
     }
     // For Sine inverse operation
     if (ele.includes('Sin-1(')) {
       const index = exp.indexOf('Sin-1(') + 5, end = exp.indexOf(')') === -1 ? exp.length - 1 : exp.indexOf(')');
-      this.firstvalue = Math.asin(eval((exp.slice(index + 1, exp[end] === ')' ? end : end + 1))));
-      if (this.isDegree === true) {
-        this.firstvalue = (Math.asin(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1)) * 3.14159265359 / 180));
-      }
+      let val = Math.asin(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1))* (this.isDegree ? 3.14159265359 / 180 : 1));
+      exp = eval(exp.slice(0,index - 5) + (Number(exp[index - 6]) ? '*' : '') +val + (Number(exp[end + 1]) ? "*" : '') + exp.slice(end + 1));
+      this.firstvalue = exp;
       ele = [];
     }
     // For Cosine operation
     if (ele.includes('Cos(')) {
       const index = exp.indexOf('Cos(') + 3, end = exp.indexOf(')') === -1 ? exp.length - 1 : exp.indexOf(')');
-      this.firstvalue = Math.cos(eval((exp.slice(index + 1, exp[end] === ')' ? end : end + 1))));
-      if (this.isDegree === true) {
-        this.firstvalue = (Math.cos(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1)) * 3.14159265359 / 180));
-      }
+      let val = Math.cos(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1)) * (this.isDegree ? 3.14159265359 / 180 : 1));
+      exp = eval(exp.slice(0,index - 3) + (Number(exp[index - 4]) ? '*' : '') +val + (Number(exp[end + 1]) ? "*" : '') + exp.slice(end + 1));
+      this.firstvalue = exp;
       ele = [];
     }
     // For Cosine inverse operation
     if (ele.includes('Cos-1(')) {
       const index = exp.indexOf('Cos-1(') + 5, end = exp.indexOf(')') === -1 ? exp.length - 1 : exp.indexOf(')');
-      this.firstvalue = Math.acos(eval((exp.slice(index + 1, exp[end] === ')' ? end : end + 1))));
-      if (this.isDegree === true) {
-        this.firstvalue = (Math.acos(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1)) * 3.14159265359 / 180));
-      }
+      let val = Math.acos(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1))* (this.isDegree ? 3.14159265359 / 180 : 1));
+      exp = eval(exp.slice(0,index - 5) + (Number(exp[index - 6]) ? '*' : '') +val + (Number(exp[end + 1]) ? "*" : '') + exp.slice(end + 1));
+      this.firstvalue = exp;
       ele = [];
     }
     // For Tan operation
     if (ele.includes('Tan(')) {
       const index = exp.indexOf('Tan(') + 3, end = exp.indexOf(')') === -1 ? exp.length - 1 : exp.indexOf(')');
-      this.firstvalue = Math.tan(eval((exp.slice(index + 1, exp[end] === ')' ? end : end + 1))));
-      if (this.isDegree === true) {
-        this.firstvalue = (Math.tan(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1)) * 3.14159265359 / 180));
-      }
+      let val = Math.tan(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1)) * (this.isDegree ? 3.14159265359 / 180 : 1));
+      exp = eval(exp.slice(0,index - 3) + (Number(exp[index - 4]) ? '*' : '') +val + (Number(exp[end + 1]) ? "*" : '') + exp.slice(end + 1));
+      this.firstvalue = exp;
       ele = [];
     }
     // For Tan Inverse operation
     if (ele.includes('Tan-1(')) {
       const index = exp.indexOf('Tan-1(') + 5, end = exp.indexOf(')') === -1 ? exp.length - 1 : exp.indexOf(')');
-      this.firstvalue = Math.atan(eval((exp.slice(index + 1, exp[end] === ')' ? end : end + 1))));
-      if (this.isDegree === true) {
-        this.firstvalue = (Math.atan(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1)) * 3.14159265359 / 180));
-      }
+      let val = Math.atan(eval(exp.slice(index + 1, exp[end] === ')' ? end : end + 1))* (this.isDegree ? 3.14159265359 / 180 : 1));
+      exp = eval(exp.slice(0,index - 5) + (Number(exp[index - 6]) ? '*' : '') +val + (Number(exp[end + 1]) ? "*" : '') + exp.slice(end + 1));
+      this.firstvalue = exp;
       ele = [];
     }
     // For Logarithm operation
@@ -262,11 +257,18 @@ export class CaldisplayComponent implements OnInit {
     // For Pi operation
     if (ele.includes('𝛑')) {
       const index = exp.indexOf('𝛑');
-      exp = exp.slice(0, index) + '*' + '(3.14159265359)' + (Number(exp[index + 2]) ? "*" : '') + exp.slice(index + 2);
+      console.log(exp);
+      
+      if(exp === '𝛑') {
+        this.firstvalue = '3.14159265359';
+      }
+      else {
+      exp = exp.slice(0, index) + (Number(exp[index - 1]) ? "*" : '') + '(3.14159265359)' + (Number(exp[index + 2]) ? "*" : '') + exp.slice(index + 2);
       ele.splice(ele.indexOf('𝛑'), 1);
       this.firstvalue = eval(exp);
       ele = [];
     }
+  }
     // For percentage operation
     if (ele.includes('%')) {
       const index = exp.indexOf('%');
@@ -322,8 +324,9 @@ export class CaldisplayComponent implements OnInit {
         if (!Number(pow1[i]) && Number(pow1[i]) !== 0) break;
         str2 = i;
       }
+      
       const square = Math.pow(pow1.slice(str2).join(''), 2);
-      exp = square + (Number(exp[index + 2]) ? "*" : '') + exp.slice(index + 2);
+      exp = exp.slice(0,str2) + (Number(exp[str2 - 1]) ? "*" : '') + square + (Number(exp[index + 2]) ? "*" : '') + exp.slice(index + 2);
       this.firstvalue = eval(exp);
       ele = [];
     }
@@ -337,7 +340,7 @@ export class CaldisplayComponent implements OnInit {
         str3 = i;
       }
       const cube = Math.pow(pow2.slice(str3).join(''), 3);
-      exp = cube + (Number(exp[index + 2]) ? "*" : '') + exp.slice(index + 2);
+      exp = exp.slice(0,str3) + (Number(exp[str3 - 1]) ? "*" : '') + cube + (Number(exp[index + 2]) ? "*" : '') + exp.slice(index + 2);
       this.firstvalue = eval(exp);
       ele = [];
     }
